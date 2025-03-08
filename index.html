@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consultoria Legal de Accidentes de Trabajo</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #1a1a1a;
+      --secondary-color: #333333;
+      --accent-color: #666666;
+      --text-light: #ffffff;
+      --text-dark: #1a1a1a;
+      --background-light: #ffffff;
+      --background-dark: #f5f5f5;
+      --border-color: #e0e0e0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Source Sans Pro', sans-serif;
+      line-height: 1.6;
+      color: var(--text-dark);
+      background-color: var(--background-light);
+    }
+
+    .header-container {
+      background: var(--background-light);
+      padding: 0;
+      width: 100%;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 0.5rem 0 0.5rem;
+      height: 80px;
+    }
+
+    .attorney-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.3rem;
+      margin-left: 2rem;
+    }
+
+    .attorney-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      letter-spacing: 0.7px;
+      line-height: 1.2;
+    }
+
+    .attorney-title {
+      font-size: 0.9rem;
+      color: var(--secondary-color);
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .nav-item {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 0 1rem;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-item:hover {
+      color: var(--primary-color);
+      background: rgba(102, 51, 153, 0.1);
+    }
+
+    .dropdown {
+      position: relative;
+      height: 80px;
+      display: flex;
+      align-items: center;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--background-light);
+      min-width: 250px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border-top: 3px solid #9966cc;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .dropdown-item {
+      display: block;
+      padding: 0.8rem 1.5rem;
+      color: var(--primary-color);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .dropdown-item:hover {
+      background: rgba(102, 51, 153, 0.1);
+      padding-left: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .nav-container {
+        flex-direction: column;
+        height: auto;
+        padding: 0;
+      }
+
+      .nav-item {
+        width: 100%;
+        height: 50px;
+        justify-content: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+      }
+
+      .nav-item::after {
+        display: none;
+      }
+
+      .dropdown {
+        height: auto;
+        width: 100%;
+      }
+
+      .dropdown-content {
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        border-top: none;
+      }
+
+      .dropdown-item {
+        text-align: center;
+        padding: 1rem;
+      }
+
+      .dropdown-item:hover {
+        padding-left: 1rem;
+      }
+
+      .attorney-name {
+        font-size: 1.2rem;
+      }
+
+      .attorney-title {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-title h1 {
+        font-size: 1.5rem;
+      }
+
+      .header-title p {
+        font-size: 1rem;
+      }
+
+      .attorney-name {
+        font-size: 1.2rem;
+      }
+
+      .attorney-title {
+        font-size: 0.9rem;
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    section {
+      padding: 60px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--primary-color);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .assistance-notice {
+      background: var(--background-dark);
+      padding: 40px;
+      text-align: center;
+      margin: 40px 0;
+    }
+
+    .assistance-notice h2 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    .contact-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 30px;
+      background: var(--background-light);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary-color);
+      color: var(--text-light);
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .submit-button:hover {
+      background: var(--secondary-color);
+    }
+
+    footer {
+      background: var(--primary-color);
+      color: var(--text-light);
+      padding: 20px 0;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* Estilos para el carrusel */
+    .carousel {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      background: var(--primary-color);
+    }
+
+    .carousel-item {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+      color: var(--text-light);
+      overflow: hidden;
+      display: none;
+    }
+
+    .carousel-item.active {
+      opacity: 1;
+      display: block;
+    }
+
+    .carousel-text {
+      position: relative;
+      width: 50%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 0 4rem;
+      text-align: left;
+      background: linear-gradient(to right,
+        rgba(0,0,0,0.95) 0%,
+        rgba(0,0,0,0.9) 40%,
+        rgba(0,0,0,0.8) 60%,
+        rgba(0,0,0,0.6) 80%,
+        rgba(0,0,0,0) 100%
+      );
+      z-index: 2;
+    }
+
+    .carousel-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      z-index: 1;
+    }
+
+    .carousel-item h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      text-align: left;
+      line-height: 1.2;
+      max-width: 90%;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .carousel-item p {
+      font-size: 1rem;
+      margin-bottom: 1.2rem;
+      max-width: 80%;
+      line-height: 1.4;
+      opacity: 0.9;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .carousel-button {
+      margin-top: 1.5rem;
+      padding: 6px 16px;
+      background-color: rgba(153, 102, 204, 0.9);
+      color: var(--text-light);
+      border: none;
+      cursor: pointer;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      font-size: 0.85rem;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .carousel-button:hover {
+      background-color: rgba(153, 102, 204, 1);
+      transform: translateY(-2px);
+    }
+
+    .carousel-control {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.3);
+      color: var(--text-light);
+      padding: 15px;
+      border: none;
+      cursor: pointer;
+      font-size: 1.2rem;
+      transition: background-color 0.3s;
+      z-index: 10;
+    }
+
+    .carousel-control:hover {
+      background: rgba(0,0,0,0.5);
+    }
+
+    .carousel-control.prev {
+      left: 10px;
+    }
+
+    .carousel-control.next {
+      right: 10px;
+    }
+
+    @media (max-width: 768px) {
+      .carousel-text {
+        width: 100%;
+        padding: 0 2rem;
+        background: linear-gradient(to bottom,
+          rgba(0,0,0,0) 0%,
+          rgba(0,0,0,0.7) 20%,
+          rgba(0,0,0,0.85) 50%,
+          rgba(0,0,0,0.9) 100%
+        );
+      }
+
+      .carousel-item h2 {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+        max-width: 100%;
+      }
+
+      .carousel-item p {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .carousel-text {
+        padding: 0 5%;
+      }
+
+      .carousel-item h2 {
+        font-size: 1.5rem;
+      }
+
+      .carousel-item p {
+        font-size: 0.9rem;
+      }
+    }
+
+    .contact-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .contact-card {
+      background: var(--background-light);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    }
+
+    .contact-card i {
+      font-size: 2.5rem;
+      color: #9966cc;
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact-card p {
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .contact-info {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-info {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+    }
+
+    .contact-form-section {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(280px, 400px));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+
+    .form-card {
+      background: var(--background-light);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .form-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    }
+
+    .form-card i {
+      font-size: 2.5rem;
+      color: #9966cc;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-color);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .form-card p {
+      color: var(--accent-color);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .form-button {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: #9966cc;
+      color: var(--text-light);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: all 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+    }
+
+    .form-button:hover {
+      background-color: #6633cc;
+      transform: translateY(-2px);
+    }
+
+    @media (max-width: 768px) {
+      .contact-form-section {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .contact-form-section {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+    }
+
+    .services-grid {
+      padding: 4rem 2rem;
+      background-color: var(--background-dark);
+      position: relative;
+      overflow: hidden;
+      min-height: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      opacity: 1;
+      transform: translateX(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      position: absolute;
+      width: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .cards-container.slide-out-left {
+      opacity: 0;
+      transform: translate(-150%);
+    }
+
+    .cards-container.slide-out-right {
+      opacity: 0;
+      transform: translate(50%);
+    }
+
+    .cards-container.slide-in-left {
+      opacity: 1;
+      transform: translateX(-50%);
+    }
+
+    .cards-container.slide-in-right {
+      opacity: 1;
+      transform: translateX(-50%);
+    }
+
+    .service-card {
+      background: var(--background-light);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+    }
+
+    .card-image-placeholder {
+      width: 100%;
+      height: 160px;
+      background: linear-gradient(45deg, #9966cc, #6633cc);
+      position: relative;
+    }
+
+    .card-content {
+      padding: 1.5rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .card-content h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary-color);
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-content p {
+      color: var(--accent-color);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      flex: 1;
+      font-size: 0.95rem;
+    }
+
+    .card-button {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: #9966cc;
+      color: var(--text-light);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 500;
+      text-align: center;
+      width: fit-content;
+      font-size: 0.9rem;
+    }
+
+    .card-button:hover {
+      background-color: #6633cc;
+    }
+
+    .service-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(153, 102, 204, 0.9);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .service-arrow:hover {
+      background: rgba(153, 102, 204, 1);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .service-arrow.prev {
+      left: 20px;
+    }
+
+    .service-arrow.next {
+      right: 20px;
+    }
+
+    @media (max-width: 1200px) {
+      .cards-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 800px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .services-grid {
+        padding: 3rem 1.5rem;
+      }
+      
+      .cards-container {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+        gap: 1.5rem;
+      }
+
+      .card-content h3 {
+        font-size: 1.3rem;
+      }
+
+      .service-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+      }
+
+      .service-arrow.prev {
+        left: 10px;
+      }
+
+      .service-arrow.next {
+        right: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .services-grid {
+        padding: 2rem 1rem;
+      }
+      
+      .cards-container {
+        gap: 1rem;
+      }
+
+      .card-content {
+        padding: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-container">
+      <div class="header-top">
+        <div class="attorney-info">
+          <div class="attorney-name">Santiago Castelli</div>
+          <div class="attorney-title">Abogado Especialista</div>
+        </div>
+        <nav>
+          <div class="nav-container">
+            <a href="index.html" class="nav-item">Inicio</a>
+            <div class="dropdown">
+              <a href="accidentes-laborales.html" class="nav-item">Accidentes</a>
+              <div class="dropdown-content">
+                <a href="accidentes-laborales.html" class="dropdown-item">Accidentes Laborales</a>
+                <a href="enfermedades-profesionales.html" class="dropdown-item">Enfermedades Profesionales</a>
+                <a href="accidentes-in-itinere.html" class="dropdown-item">Accidentes In Itinere</a>
+                <a href="incapacidades-laborales.html" class="dropdown-item">Incapacidades Laborales</a>
+              </div>
+            </div>
+            <div class="dropdown">
+              <a href="despido-sin-causa.html" class="nav-item">Despidos</a>
+              <div class="dropdown-content">
+                <a href="despido-sin-causa.html" class="dropdown-item">Despido Sin Causa</a>
+                <a href="despido-discriminatorio.html" class="dropdown-item">Despido Discriminatorio</a>
+                <a href="despido-indirecto.html" class="dropdown-item">Despido Indirecto</a>
+                <a href="acuerdos-laborales.html" class="dropdown-item">Acuerdos Laborales</a>
+              </div>
+            </div>
+            <a href="nosotros.html" class="nav-item">Nosotros</a>
+            <a href="#contacto" class="nav-item">Contacto</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <div class="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <div class="carousel-text">
+          <h2>Profesionales expertos en legislación laboral</h2>
+          <p>Protegiendo sus derechos en el lugar de trabajo</p>
+        </div>
+        <div class="carousel-image" style="background-image: url('accidentes.jpg');"></div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-text">
+          <h2>Asesores con amplia experiencia en trámites ante la ART</h2>
+          <p>Cada caso es único y merece atención especializada</p>
+        </div>
+        <div class="carousel-image" style="background-image: url('asesoramiento.jpeg');"></div>
+      </div>
+      <div class="carousel-item">
+        <div class="carousel-text">
+          <h2>Resultados Comprobados</h2>
+          <p>Miles de casos exitosos respaldan nuestra experiencia</p>
+        </div>
+        <div class="carousel-image" style="background-image: url('recomprobados.jpeg');"></div>
+      </div>
+    </div>
+    <button class="carousel-control prev" onclick="moveCarousel(-1)">❮</button>
+    <button class="carousel-control next" onclick="moveCarousel(1)">❯</button>
+    <div class="carousel-indicators">
+      <button class="carousel-indicator active" onclick="goToSlide(0)"></button>
+      <button class="carousel-indicator" onclick="goToSlide(1)"></button>
+      <button class="carousel-indicator" onclick="goToSlide(2)"></button>
+    </div>
+  </div>
+
+  <section id="servicios-grid" class="services-grid">
+    <button class="service-arrow prev" onclick="toggleServices('prev')">❮</button>
+    <button class="service-arrow next" onclick="toggleServices('next')">❯</button>
+    
+    <div class="cards-container" id="accidentesCards">
+      <div class="service-card">
+        <div class="card-image-placeholder" style="background-image: url('acclaborales.jpeg'); background-size: cover; background-position: center;">
+        </div>
+        <div class="card-content">
+          <h3>Accidentes Laborales</h3>
+          <p>Especialistas en la gestión de casos de accidentes en el trabajo, garantizando la máxima compensación para nuestros clientes.</p>
+          <a href="#" class="card-button">Ver más</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="card-image-placeholder" style="background-image: url('enflaborales.jpg'); background-size: cover; background-position: center;">
+        </div>
+        <div class="card-content">
+          <h3>Enfermedades Profesionales</h3>
+          <p>Asesoramiento experto en casos de enfermedades desarrolladas en el ámbito laboral.</p>
+          <a href="#" class="card-button">Ver más</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="card-image-placeholder" style="background-image: url('initinere.jpeg'); background-size: cover; background-position: center;">
+        </div>
+        <div class="card-content">
+          <h3>Accidentes In Itinere</h3>
+          <p>Protección legal completa para accidentes ocurridos en el trayecto hacia o desde el trabajo.</p>
+          <a href="#" class="card-button">Ver más</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="card-image-placeholder" style="background-image: url('inclaborales.jpg'); background-size: cover; background-position: center;">
+        </div>
+        <div class="card-content">
+          <h3>Incapacidades Laborales</h3>
+          <p>Cálculo y gestión de indemnizaciones laborales para garantizar una compensación justa.</p>
+          <a href="#" class="card-button">Ver más</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="cards-container" id="despidosCards" style="display: none;">
+      <div class="service-card">
+        <div class="card-image-placeholder">
+          <!-- Placeholder para imagen -->
+        </div>
+        <div class="card-content">
+          <h3>Despido Sin Causa</h3>
+          <p>Asesoramiento legal integral para casos de despidos sin justificación, asegurando una indemnización justa.</p>
+          <a href="#" class="card-button">Ver más</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="card-image-placeholder">
+          <!-- Placeholder para imagen -->
+        </div>
+        <div class="card-content">
+          <h3>Despido Discriminatorio</h3>
+          <p>Defensa especializada en casos de despidos por discriminación, protegiendo sus derechos fundamentales.</p>
+          <a href="#" class="card-button">Ver más</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="card-image-placeholder">
+          <!-- Placeholder para imagen -->
+        </div>
+        <div class="card-content">
+          <h3>Despido Indirecto</h3>
+          <p>Apoyo legal en situaciones donde las condiciones laborales fuerzan la renuncia del trabajador.</p>
+          <a href="#" class="card-button">Ver más</a>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <div class="card-image-placeholder">
+          <!-- Placeholder para imagen -->
+        </div>
+        <div class="card-content">
+          <h3>Acuerdos Laborales</h3>
+          <p>Negociación y redacción de acuerdos laborales que protejan sus intereses y derechos.</p>
+          <a href="#" class="card-button">Ver más</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contacto">
+    <div class="contact-info">
+      <div class="contact-card">
+        <i class="fas fa-map-marker-alt"></i>
+        <h3>Ubicación</h3>
+        <p>Av Belgrano 1255 - PB</p>
+        <p>CABA, Buenos Aires</p>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-phone"></i>
+        <h3>Teléfono</h3>
+        <p>Tel: (+54) 11-7235-2624</p>
+        <p>Lunes a Viernes 9:00 - 18:00</p>
+      </div>
+      <div class="contact-card">
+        <i class="fas fa-envelope"></i>
+        <h3>Email</h3>
+        <p>info@guiart.com.ar</p>
+        <p>Respondemos en 24hs hábiles</p>
+      </div>
+    </div>
+
+    <div class="contact-form-section">
+      <div class="form-card">
+        <i class="fas fa-file-pdf"></i>
+        <h3>Formulario de Consulta</h3>
+        <p>Complete nuestro formulario detallado para que podamos evaluar su caso y brindarle la mejor asesoría legal posible.</p>
+        <button class="form-button" onclick="window.location.href='formulario.html'">
+          Completar Formulario
+        </button>
+      </div>
+      <div class="form-card">
+        <i class="fas fa-comments"></i>
+        <h3>Consulta Rápida</h3>
+        <p>Si prefiere una respuesta inmediata, puede contactarnos directamente por WhatsApp o llamarnos por teléfono.</p>
+        <button class="form-button" onclick="window.location.href='https://wa.me/5491172352624?text=Hola%2C%20quisiera%20realizar%20una%20consulta%20legal'">
+          Contactar por WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2024 Santiago Castelli - Todos los Derechos Reservado | Web Design by TwentyTwo ®</p>
+  </footer>
+
+  <script>
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const accidentType = document.getElementById('accident-type').value;
+      const message = document.getElementById('message').value;
+
+      alert(`Gracias ${name} por contactarnos. Nos comunicaremos contigo pronto a través de ${email} o ${phone}.`);
+      
+      // Limpiar el formulario
+      event.target.reset();
+    }
+
+    // Código para el carrusel
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-item');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    
+    function showSlide(n) {
+      slides.forEach(slide => slide.classList.remove('active'));
+      indicators.forEach(indicator => indicator.classList.remove('active'));
+      
+      currentSlide = (n + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+      indicators[currentSlide].classList.add('active');
+    }
+    
+    function moveCarousel(direction) {
+      showSlide(currentSlide + direction);
+    }
+    
+    function goToSlide(n) {
+      showSlide(n);
+    }
+    
+    // Cambio automático de diapositivas cada 5 segundos
+    setInterval(() => moveCarousel(1), 5000);
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (file) {
+        alert('Gracias por enviar su formulario. Nos pondremos en contacto con usted pronto.');
+        // Aquí puedes agregar la lógica para manejar la subida del archivo
+      }
+    }
+
+    let currentServiceType = 'accidentes';
+
+    function toggleServices(direction) {
+      const accidentesCards = document.getElementById('accidentesCards');
+      const despidosCards = document.getElementById('despidosCards');
+      
+      if ((direction === 'next' && currentServiceType === 'accidentes') || 
+          (direction === 'prev' && currentServiceType === 'despidos')) {
+        // Transición de accidentes a despidos
+        accidentesCards.classList.add('slide-out-left');
+        despidosCards.style.display = 'grid';
+        despidosCards.classList.add('slide-out-right');
+        
+        setTimeout(() => {
+          accidentesCards.style.display = 'none';
+          despidosCards.classList.remove('slide-out-right');
+          despidosCards.classList.add('slide-in-right');
+          currentServiceType = 'despidos';
+        }, 50);
+      } else if ((direction === 'prev' && currentServiceType === 'accidentes') || 
+                 (direction === 'next' && currentServiceType === 'despidos')) {
+        // Transición de despidos a accidentes
+        despidosCards.classList.add('slide-out-right');
+        accidentesCards.style.display = 'grid';
+        accidentesCards.classList.add('slide-out-left');
+        
+        setTimeout(() => {
+          despidosCards.style.display = 'none';
+          accidentesCards.classList.remove('slide-out-left');
+          accidentesCards.classList.add('slide-in-left');
+          currentServiceType = 'accidentes';
+        }, 50);
+      }
+    }
+  </script>
+</body>
+</html>
