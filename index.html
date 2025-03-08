@@ -93,7 +93,7 @@
       text-decoration: none;
       font-size: 0.9rem;
       font-weight: 500;
-      padding: 0 1rem;
+      padding: 0 1.2rem;
       height: 80px;
       display: flex;
       align-items: center;
@@ -102,8 +102,23 @@
     }
 
     .nav-item:hover {
-      color: var(--primary-color);
-      background: rgba(102, 51, 153, 0.1);
+      color: #9966cc;
+    }
+
+    .nav-item::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #9966cc;
+      transition: all 0.3s ease;
+      transform: translateX(-50%);
+    }
+
+    .nav-item:hover::after {
+      width: 100%;
     }
 
     .dropdown {
@@ -113,6 +128,21 @@
       align-items: center;
     }
 
+    .dropdown > .nav-item::before {
+      content: '▾';
+      margin-left: 0.5rem;
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+      position: absolute;
+      right: 0;
+      opacity: 0.6;
+    }
+
+    .dropdown:hover > .nav-item::before {
+      transform: rotate(180deg);
+      opacity: 1;
+    }
+
     .dropdown-content {
       display: none;
       position: absolute;
@@ -120,13 +150,20 @@
       left: 0;
       background: var(--background-light);
       min-width: 250px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      border-top: 3px solid #9966cc;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
       z-index: 1000;
+      border: 1px solid rgba(153, 102, 204, 0.1);
     }
 
     .dropdown:hover .dropdown-content {
       display: block;
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .dropdown-item {
@@ -134,61 +171,58 @@
       padding: 0.8rem 1.5rem;
       color: var(--primary-color);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       transition: all 0.3s ease;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid rgba(153, 102, 204, 0.08);
+      background: transparent;
+      position: relative;
+    }
+
+    .dropdown-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 0;
+      background: rgba(153, 102, 204, 0.04);
+      transition: all 0.3s ease;
     }
 
     .dropdown-item:hover {
-      background: rgba(102, 51, 153, 0.1);
-      padding-left: 2rem;
+      color: #9966cc;
+      padding-left: 1.8rem;
+    }
+
+    .dropdown-item:hover::before {
+      width: 100%;
+    }
+
+    .dropdown-item:last-child {
+      border-bottom: none;
     }
 
     @media (max-width: 768px) {
-      .nav-container {
-        flex-direction: column;
-        height: auto;
-        padding: 0;
-      }
-
-      .nav-item {
-        width: 100%;
-        height: 50px;
-        justify-content: center;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-
-      .nav-item::after {
-        display: none;
-      }
-
-      .dropdown {
-        height: auto;
-        width: 100%;
+      .dropdown > .nav-item::before {
+        right: 1.5rem;
       }
 
       .dropdown-content {
-        position: static;
-        width: 100%;
         box-shadow: none;
-        border-top: none;
+        border: none;
+        border-radius: 0;
+        background: rgba(153, 102, 204, 0.02);
       }
 
       .dropdown-item {
-        text-align: center;
-        padding: 1rem;
+        padding: 1rem 2rem;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(153, 102, 204, 0.06);
       }
 
       .dropdown-item:hover {
-        padding-left: 1rem;
-      }
-
-      .attorney-name {
-        font-size: 1.2rem;
-      }
-
-      .attorney-title {
-        font-size: 0.9rem;
+        background: rgba(153, 102, 204, 0.04);
+        padding-left: 2.3rem;
       }
     }
 
@@ -291,9 +325,35 @@
     footer {
       background: var(--primary-color);
       color: var(--text-light);
-      padding: 20px 0;
+      padding: 1.5rem 1rem;
       text-align: center;
       font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      footer {
+        padding: 1.2rem 1rem;
+      }
+
+      footer p {
+        font-size: 0.8rem;
+        line-height: 1.5;
+        max-width: 90%;
+        margin: 0 auto;
+      }
+    }
+
+    @media (max-width: 480px) {
+      footer {
+        padding: 1rem;
+      }
+
+      footer p {
+        font-size: 0.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
     }
 
     /* Estilos para el carrusel */
@@ -302,6 +362,7 @@
       height: 400px;
       overflow: hidden;
       background: var(--primary-color);
+      z-index: 1;
     }
 
     .carousel-item {
@@ -418,41 +479,138 @@
     }
 
     @media (max-width: 768px) {
+      .carousel {
+        height: 300px;
+        margin-bottom: 20px;
+      }
+
       .carousel-text {
         width: 100%;
         padding: 0 2rem;
-        background: linear-gradient(to bottom,
-          rgba(0,0,0,0) 0%,
-          rgba(0,0,0,0.7) 20%,
-          rgba(0,0,0,0.85) 50%,
-          rgba(0,0,0,0.9) 100%
+        background: linear-gradient(
+          to bottom,
+          rgba(0,0,0,0.9) 0%,
+          rgba(0,0,0,0.8) 100%
         );
-      }
-
-      .carousel-item h2 {
-        font-size: 1.8rem;
-        margin-bottom: 0.8rem;
-        max-width: 100%;
-      }
-
-      .carousel-item p {
-        font-size: 0.95rem;
-        margin-bottom: 1rem;
-        max-width: 100%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .carousel-text {
-        padding: 0 5%;
+        justify-content: flex-end;
+        padding-bottom: 2rem;
       }
 
       .carousel-item h2 {
         font-size: 1.5rem;
+        margin-bottom: 0.8rem;
       }
 
       .carousel-item p {
         font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .nav-container {
+        display: none;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: var(--background-light);
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+      }
+
+      .nav-container.active {
+        display: block;
+      }
+
+      .nav-item {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 1rem 2rem;
+        height: auto;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .dropdown-content {
+        position: static;
+        box-shadow: none;
+        width: 100%;
+        display: none;
+        padding-left: 1rem;
+      }
+
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+
+      .dropdown-item {
+        padding: 0.8rem 2rem;
+      }
+
+      /* Agregamos botón de menú hamburguesa */
+      .menu-toggle {
+        display: block;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        cursor: pointer;
+        padding: 1rem;
+      }
+
+      .services-grid {
+        padding: 2rem 1rem;
+        margin-top: 0;
+      }
+
+      .cards-container {
+        position: relative;
+        z-index: 3;
+        background-color: var(--background-dark);
+      }
+
+      .service-card {
+        position: relative;
+        z-index: 4;
+      }
+
+      footer p {
+        font-size: 0.8rem;
+        padding: 0 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .carousel {
+        height: 250px;
+        margin-bottom: 10px;
+      }
+
+      .carousel-text {
+        padding: 0 1.5rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .carousel-item h2 {
+        font-size: 1.3rem;
+      }
+
+      .carousel-item p {
+        font-size: 0.85rem;
+      }
+
+      .attorney-info {
+        margin-left: 1rem;
+      }
+
+      .attorney-name {
+        font-size: 1.4rem;
+      }
+
+      .attorney-title {
+        font-size: 0.8rem;
       }
     }
 
@@ -591,14 +749,15 @@
     }
 
     .services-grid {
-      padding: 4rem 2rem;
-      background-color: var(--background-dark);
       position: relative;
-      overflow: hidden;
+      background-color: var(--background-dark);
+      padding: 2rem;
       min-height: 600px;
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
+      z-index: 2;
     }
 
     .cards-container {
@@ -608,32 +767,36 @@
       max-width: 1200px;
       margin: 0 auto;
       opacity: 1;
-      transform: translateX(0);
       transition: opacity 0.5s ease, transform 0.5s ease;
-      position: absolute;
       width: 100%;
-      left: 50%;
-      transform: translateX(-50%);
+      position: relative;
+      left: 0;
+      transform: none;
     }
 
     .cards-container.slide-out-left {
       opacity: 0;
-      transform: translate(-150%);
+      transform: translateX(-100px);
     }
 
     .cards-container.slide-out-right {
       opacity: 0;
-      transform: translate(50%);
+      transform: translateX(100px);
     }
 
     .cards-container.slide-in-left {
       opacity: 1;
-      transform: translateX(-50%);
+      transform: translateX(0);
     }
 
     .cards-container.slide-in-right {
       opacity: 1;
-      transform: translateX(-50%);
+      transform: translateX(0);
+    }
+
+    #accidentesCards, #despidosCards {
+      position: relative;
+      width: 100%;
     }
 
     .service-card {
@@ -705,32 +868,84 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: rgba(153, 102, 204, 0.9);
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
+      background: transparent;
+      color: var(--primary-color);
+      border: 2px solid var(--primary-color);
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       cursor: pointer;
       z-index: 10;
       transition: all 0.3s ease;
       display: flex;
       align-items: center;
       justify-content: center;
+      opacity: 0.7;
     }
 
     .service-arrow:hover {
-      background: rgba(153, 102, 204, 1);
+      background: var(--primary-color);
+      color: white;
+      opacity: 1;
       transform: translateY(-50%) scale(1.1);
     }
 
-    .service-arrow.prev {
-      left: 20px;
+    @media (max-width: 768px) {
+      .service-arrow {
+        position: absolute;
+        bottom: 20px;
+        top: auto;
+        transform: none;
+        width: 40px;
+        height: 40px;
+        background: var(--background-light);
+        border: 2px solid var(--primary-color);
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        opacity: 0.9;
+      }
+
+      .services-grid {
+        padding-bottom: 80px;
+      }
+
+      .service-arrow.prev {
+        left: calc(50% - 50px);
+      }
+
+      .service-arrow.next {
+        right: calc(50% - 50px);
+      }
+
+      .service-arrow:hover {
+        transform: scale(1.1);
+        background: var(--primary-color);
+      }
+
+      .service-arrow:active {
+        transform: scale(0.95);
+      }
     }
 
-    .service-arrow.next {
-      right: 20px;
+    @media (max-width: 480px) {
+      .service-arrow {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        bottom: 15px;
+      }
+
+      .services-grid {
+        padding-bottom: 70px;
+      }
+
+      .service-arrow.prev {
+        left: calc(50% - 45px);
+      }
+
+      .service-arrow.next {
+        right: calc(50% - 45px);
+      }
     }
 
     @media (max-width: 1200px) {
@@ -742,14 +957,13 @@
     }
 
     @media (max-width: 768px) {
-      .services-grid {
-        padding: 3rem 1.5rem;
-      }
-      
       .cards-container {
+        position: relative;
         grid-template-columns: 1fr;
         max-width: 600px;
         gap: 1.5rem;
+        transform: none;
+        left: 0;
       }
 
       .card-content h3 {
@@ -772,16 +986,181 @@
     }
 
     @media (max-width: 480px) {
-      .services-grid {
-        padding: 2rem 1rem;
-      }
-      
       .cards-container {
         gap: 1rem;
       }
 
       .card-content {
         padding: 1.25rem;
+      }
+    }
+
+    /* Estilos del menú móvil */
+    @media (max-width: 768px) {
+      .header-top {
+        padding: 0 1rem;
+        position: relative;
+      }
+
+      .nav-container {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--background-light);
+        overflow-y: auto;
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      .nav-container.active {
+        display: block;
+      }
+
+      .nav-item {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 1rem 2rem;
+        height: auto;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        color: var(--primary-color);
+      }
+
+      .dropdown {
+        width: 100%;
+      }
+
+      .dropdown > .nav-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .dropdown > .nav-item::before {
+        content: '▼';
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown.active > .nav-item::before {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-content {
+        display: none;
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background: #f8f8f8;
+        padding: 0;
+        border-top: none;
+      }
+
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+
+      .dropdown-item {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        color: var(--secondary-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .menu-toggle {
+        display: block;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        cursor: pointer;
+        padding: 1rem;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .nav-container {
+        display: flex !important;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #servicios-grid {
+        overflow: hidden;
+        position: relative;
+        margin-top: 2rem;
+        padding-top: 2rem;
+        background: var(--background-dark);
+      }
+
+      .carousel {
+        position: relative;
+        z-index: 1;
+      }
+
+      .services-grid {
+        position: relative;
+        z-index: 2;
+      }
+
+      #accidentesCards, #despidosCards {
+        position: relative;
+        width: 100%;
+        left: 0;
+        transform: none;
+      }
+    }
+
+    .service-indicators {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: -1rem;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .service-indicator {
+      width: 40px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(153, 102, 204, 0.3);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .service-indicator.active {
+      background: rgba(153, 102, 204, 1);
+      width: 50px;
+    }
+
+    @media (max-width: 768px) {
+      .service-indicators {
+        margin-top: 0;
+        margin-bottom: 2rem;
+      }
+      
+      .service-indicator {
+        width: 30px;
+        height: 3px;
+      }
+      
+      .service-indicator.active {
+        width: 40px;
       }
     }
   </style>
@@ -794,11 +1173,14 @@
           <div class="attorney-name">Santiago Castelli</div>
           <div class="attorney-title">Abogado Especialista</div>
         </div>
+        <button class="menu-toggle" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
         <nav>
-          <div class="nav-container">
+          <div class="nav-container" id="navContainer">
             <a href="index.html" class="nav-item">Inicio</a>
             <div class="dropdown">
-              <a href="accidentes-laborales.html" class="nav-item">Accidentes</a>
+              <a class="nav-item">Accidentes</a>
               <div class="dropdown-content">
                 <a href="accidentes-laborales.html" class="dropdown-item">Accidentes Laborales</a>
                 <a href="enfermedades-profesionales.html" class="dropdown-item">Enfermedades Profesionales</a>
@@ -807,7 +1189,7 @@
               </div>
             </div>
             <div class="dropdown">
-              <a href="despido-sin-causa.html" class="nav-item">Despidos</a>
+              <a class="nav-item">Despidos</a>
               <div class="dropdown-content">
                 <a href="despido-sin-causa.html" class="dropdown-item">Despido Sin Causa</a>
                 <a href="despido-discriminatorio.html" class="dropdown-item">Despido Discriminatorio</a>
@@ -857,8 +1239,10 @@
   </div>
 
   <section id="servicios-grid" class="services-grid">
-    <button class="service-arrow prev" onclick="toggleServices('prev')">❮</button>
-    <button class="service-arrow next" onclick="toggleServices('next')">❯</button>
+    <div class="service-indicators">
+      <button class="service-indicator active" onclick="switchToService('accidentes')"></button>
+      <button class="service-indicator" onclick="switchToService('despidos')"></button>
+    </div>
     
     <div class="cards-container" id="accidentesCards">
       <div class="service-card">
@@ -992,7 +1376,10 @@
   </section>
 
   <footer>
-    <p>&copy; 2024 Santiago Castelli - Todos los Derechos Reservado | Web Design by TwentyTwo ®</p>
+    <p>
+      <span>&copy; 2024 Santiago Castelli - Todos los Derechos Reservados</span>
+      <span>Web Design by TwentyTwo ®</span>
+    </p>
   </footer>
 
   <script>
@@ -1045,38 +1432,82 @@
 
     let currentServiceType = 'accidentes';
 
-    function toggleServices(direction) {
+    function switchToService(service) {
       const accidentesCards = document.getElementById('accidentesCards');
       const despidosCards = document.getElementById('despidosCards');
+      const indicators = document.querySelectorAll('.service-indicator');
       
-      if ((direction === 'next' && currentServiceType === 'accidentes') || 
-          (direction === 'prev' && currentServiceType === 'despidos')) {
-        // Transición de accidentes a despidos
-        accidentesCards.classList.add('slide-out-left');
-        despidosCards.style.display = 'grid';
-        despidosCards.classList.add('slide-out-right');
-        
-        setTimeout(() => {
-          accidentesCards.style.display = 'none';
-          despidosCards.classList.remove('slide-out-right');
-          despidosCards.classList.add('slide-in-right');
-          currentServiceType = 'despidos';
-        }, 50);
-      } else if ((direction === 'prev' && currentServiceType === 'accidentes') || 
-                 (direction === 'next' && currentServiceType === 'despidos')) {
-        // Transición de despidos a accidentes
-        despidosCards.classList.add('slide-out-right');
+      if (service === 'accidentes') {
         accidentesCards.style.display = 'grid';
-        accidentesCards.classList.add('slide-out-left');
-        
-        setTimeout(() => {
-          despidosCards.style.display = 'none';
-          accidentesCards.classList.remove('slide-out-left');
-          accidentesCards.classList.add('slide-in-left');
-          currentServiceType = 'accidentes';
-        }, 50);
+        despidosCards.style.display = 'none';
+        currentServiceType = 'accidentes';
+        indicators[0].classList.add('active');
+        indicators[1].classList.remove('active');
+      } else {
+        despidosCards.style.display = 'grid';
+        accidentesCards.style.display = 'none';
+        currentServiceType = 'despidos';
+        indicators[0].classList.remove('active');
+        indicators[1].classList.add('active');
       }
     }
+
+    // Cambio automático cada 8 segundos
+    setInterval(() => {
+      const nextService = currentServiceType === 'accidentes' ? 'despidos' : 'accidentes';
+      switchToService(nextService);
+    }, 8000);
+
+    function toggleMenu() {
+      const navContainer = document.getElementById('navContainer');
+      navContainer.classList.toggle('active');
+      document.body.style.overflow = navContainer.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // Mejorar el manejo de dropdowns en móvil
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+      const dropdownLink = dropdown.querySelector('.nav-item');
+      
+      dropdownLink.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          const wasActive = dropdown.classList.contains('active');
+          
+          // Cerrar todos los dropdowns
+          document.querySelectorAll('.dropdown').forEach(d => {
+            d.classList.remove('active');
+          });
+          
+          // Abrir el actual si no estaba activo
+          if (!wasActive) {
+            dropdown.classList.add('active');
+          }
+        }
+      });
+    });
+
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', function(e) {
+      const navContainer = document.getElementById('navContainer');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      if (!navContainer.contains(e.target) && !menuToggle.contains(e.target)) {
+        navContainer.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+
+    // Ajustar altura del carrusel al cambiar tamaño de ventana
+    window.addEventListener('resize', function() {
+      const carousel = document.querySelector('.carousel');
+      if (window.innerWidth <= 480) {
+        carousel.style.height = '250px';
+      } else if (window.innerWidth <= 768) {
+        carousel.style.height = '300px';
+      } else {
+        carousel.style.height = '400px';
+      }
+    });
   </script>
 </body>
 </html>
