@@ -147,31 +147,37 @@
 
     /* Estilos específicos para la página Nosotros */
     .page-header {
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('nosotros.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 300px;
+      position: relative;
+      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       color: var(--text-light);
       padding: 2rem;
+      background: var(--primary-color);
+    }
+
+    .page-header::before {
+      display: none;
+    }
+
+    .page-header::after {
+      display: none;
     }
 
     .page-title {
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
 
     .page-subtitle {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.2rem;
-      max-width: 800px;
+      font-size: 1rem;
+      max-width: 600px;
       margin: 0 auto;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      opacity: 0.9;
     }
 
     .about-section {
@@ -244,7 +250,7 @@
     }
 
     .team-container {
-      max-width: 1200px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 0 2rem;
     }
@@ -263,8 +269,9 @@
 
     .team-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: minmax(280px, 400px);
       gap: 2rem;
+      justify-content: center;
     }
 
     .team-member {
@@ -338,6 +345,107 @@
       text-align: center;
       font-size: 0.9rem;
     }
+
+    /* Estilos del menú móvil */
+    @media (max-width: 768px) {
+      .header-top {
+        padding: 0 1rem;
+      }
+
+      .nav-container {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--background-light);
+        overflow-y: auto;
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      .nav-container.active {
+        display: block;
+      }
+
+      .menu-toggle {
+        display: block;
+        font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        cursor: pointer;
+        padding: 0.5rem;
+        margin-left: auto;
+      }
+
+      nav {
+        margin-left: 0;
+      }
+
+      .nav-item {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 1rem 2rem;
+        height: auto;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        color: var(--primary-color);
+      }
+
+      .dropdown {
+        width: 100%;
+      }
+
+      .dropdown > .nav-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .dropdown > .nav-item::before {
+        content: '▼';
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown.active > .nav-item::before {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-content {
+        display: none;
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background: #f8f8f8;
+        padding: 0;
+        border-top: none;
+      }
+
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+
+      .dropdown-item {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        color: var(--secondary-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .nav-container {
+        display: flex !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -349,7 +457,10 @@
           <div class="attorney-title">Abogado Especialista</div>
         </div>
         <nav>
-          <div class="nav-container">
+          <button class="menu-toggle" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="nav-container" id="navContainer">
             <a href="index.html" class="nav-item">Inicio</a>
             <div class="dropdown">
               <a href="accidentes-laborales.html" class="nav-item">Accidentes</a>
@@ -380,14 +491,14 @@
   <div class="page-header">
     <div>
       <h1 class="page-title">Sobre Nosotros</h1>
-      <p class="page-subtitle">Más de 15 años de experiencia defendiendo los derechos laborales</p>
+      <p class="page-subtitle">Amplia trayectoria en la defensa de los derechos laborales</p>
     </div>
   </div>
 
   <section class="about-section">
     <div class="about-intro">
       <h2>Nuestra Historia</h2>
-      <p>Desde 2009, nuestro estudio jurídico se ha dedicado exclusivamente a la defensa de los derechos laborales, construyendo una sólida reputación basada en la excelencia profesional y el compromiso con nuestros clientes. A lo largo de los años, hemos ayudado a miles de trabajadores a obtener la justicia y compensación que merecen.</p>
+      <p>Me dedico exclusivamente a la defensa de los derechos laborales, construyendo una reputación basada en la excelencia profesional y el compromiso con cada cliente. He ayudado a innumerables trabajadores a obtener la justicia y compensación que merecen.</p>
     </div>
 
     <div class="values-grid">
@@ -414,7 +525,7 @@
   <section class="team-section">
     <div class="team-container">
       <div class="team-intro">
-        <h2>Nuestro Equipo</h2>
+        <h2>Dirección del Estudio</h2>
       </div>
       <div class="team-grid">
         <div class="team-member">
@@ -423,30 +534,8 @@
           </div>
           <div class="member-info">
             <h3>Dr. Santiago Castelli</h3>
-            <h4>Abogado Fundador</h4>
-            <p>Especialista en derecho laboral con más de 15 años de experiencia. Graduado de la Universidad de Buenos Aires con honores.</p>
-          </div>
-        </div>
-
-        <div class="team-member">
-          <div class="member-image">
-            <!-- Imagen del miembro del equipo -->
-          </div>
-          <div class="member-info">
-            <h3>Dra. María González</h3>
-            <h4>Abogada Senior</h4>
-            <p>Especialista en accidentes laborales y enfermedades profesionales. Más de 10 años de experiencia en litigios laborales.</p>
-          </div>
-        </div>
-
-        <div class="team-member">
-          <div class="member-image">
-            <!-- Imagen del miembro del equipo -->
-          </div>
-          <div class="member-info">
-            <h3>Dr. Carlos Rodríguez</h3>
-            <h4>Abogado Senior</h4>
-            <p>Experto en despidos y negociaciones laborales. Amplia experiencia en mediación y resolución de conflictos.</p>
+            <h4>Abogado Especialista en Derecho Laboral</h4>
+            <p>Profesional del derecho, especializado en el ámbito laboral, y egresado de la Universidad de Buenos Aires. Mi enfoque se centra en brindar asesoramiento legal integral y representación efectiva a trabajadores y empleadores en diversas cuestiones laborales. Busco soluciones justas y equitativas para cada caso, priorizando siempre los derechos y el bienestar de mis clientes.</p>
           </div>
         </div>
       </div>
@@ -454,7 +543,51 @@
   </section>
 
   <footer>
-    <p>&copy; 2024 Santiago Castelli Abogado - Todos los Derechos Reservados</p>
+    <p>
+      <span>&copy; 2024 Santiago Castelli - Todos los Derechos Reservados |</span>
+      <span>Web Design by TwentyTwo ®</span>
+    </p>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const navContainer = document.getElementById('navContainer');
+      navContainer.classList.toggle('active');
+      document.body.style.overflow = navContainer.classList.contains('active') ? 'hidden' : '';
+    }
+
+    // Mejorar el manejo de dropdowns en móvil
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+      const dropdownLink = dropdown.querySelector('.nav-item');
+      
+      dropdownLink.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          const wasActive = dropdown.classList.contains('active');
+          
+          // Cerrar todos los dropdowns
+          document.querySelectorAll('.dropdown').forEach(d => {
+            d.classList.remove('active');
+          });
+          
+          // Abrir el actual si no estaba activo
+          if (!wasActive) {
+            dropdown.classList.add('active');
+          }
+        }
+      });
+    });
+
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', function(e) {
+      const navContainer = document.getElementById('navContainer');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      if (!navContainer.contains(e.target) && !menuToggle.contains(e.target)) {
+        navContainer.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
 </body>
 </html> 

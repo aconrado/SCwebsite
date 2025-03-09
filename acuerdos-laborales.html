@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Acuerdos Laborales - Santiago Castelli Abogado</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
@@ -148,31 +148,37 @@
 
     /* Contenido específico de la página */
     .page-header {
-      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('acuerdos.jpg');
-      background-size: cover;
-      background-position: center;
-      height: 300px;
+      position: relative;
+      height: 200px;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
       color: var(--text-light);
       padding: 2rem;
+      background: var(--primary-color);
+    }
+
+    .page-header::before {
+      display: none;
+    }
+
+    .page-header::after {
+      display: none;
     }
 
     .page-title {
       font-family: 'Playfair Display', serif;
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
     }
 
     .page-subtitle {
       font-family: 'Montserrat', sans-serif;
-      font-size: 1.2rem;
-      max-width: 800px;
+      font-size: 1rem;
+      max-width: 600px;
       margin: 0 auto;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+      opacity: 0.9;
     }
 
     .content-section {
@@ -184,28 +190,67 @@
     .content-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 3rem;
+      gap: 2.5rem;
       margin-top: 3rem;
     }
 
     .content-card {
       background: var(--background-light);
-      border-radius: 8px;
-      padding: 2rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      padding: 2.5rem;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .content-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #9966cc;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .content-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 32px rgba(153, 102, 204, 0.15);
+    }
+
+    .content-card:hover::before {
+      transform: scaleX(1);
     }
 
     .content-card h3 {
       font-family: 'Playfair Display', serif;
-      color: var(--primary-color);
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+      color: #9966cc;
+      font-size: 1.6rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+      padding-bottom: 0.8rem;
+    }
+
+    .content-card h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: #9966cc;
+      opacity: 0.3;
     }
 
     .content-card p {
       color: var(--accent-color);
-      margin-bottom: 1rem;
-      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+      font-size: 1.05rem;
     }
 
     .content-list {
@@ -215,22 +260,38 @@
 
     .content-list li {
       margin-bottom: 1rem;
-      padding-left: 1.5rem;
+      padding-left: 1.8rem;
       position: relative;
+      color: var(--secondary-color);
+      font-size: 1rem;
+      line-height: 1.6;
     }
 
     .content-list li:before {
       content: "•";
       color: #9966cc;
-      font-size: 1.2rem;
+      font-size: 1.4rem;
       position: absolute;
       left: 0;
+      top: -0.2rem;
     }
 
     @media (max-width: 768px) {
       .content-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
+      }
+
+      .content-card {
+        padding: 2rem;
+      }
+
+      .content-card h3 {
+        font-size: 1.4rem;
+      }
+
+      .content-card p {
+        font-size: 1rem;
       }
 
       .page-header {
@@ -244,16 +305,108 @@
       .page-subtitle {
         font-size: 1rem;
       }
-    }
 
-    @media (max-width: 480px) {
-      .content-section {
-        margin: 2rem auto;
+      .header-top {
         padding: 0 1rem;
       }
 
-      .page-title {
+      .nav-container {
+        display: none;
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100vh - 80px);
+        background: var(--background-light);
+        overflow-y: auto;
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      .nav-container.active {
+        display: block;
+      }
+
+      .menu-toggle {
+        display: block;
         font-size: 1.8rem;
+        background: none;
+        border: none;
+        color: var(--primary-color);
+        cursor: pointer;
+        padding: 0.5rem;
+        margin-left: auto;
+      }
+
+      nav {
+        margin-left: 0;
+      }
+
+      .nav-item {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 1rem 2rem;
+        height: auto;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 1.1rem;
+        color: var(--primary-color);
+      }
+
+      .dropdown {
+        width: 100%;
+        height: auto;
+      }
+
+      .dropdown > .nav-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .dropdown > .nav-item::after {
+        content: '▼';
+        font-size: 0.8rem;
+        transition: transform 0.3s ease;
+      }
+
+      .dropdown.active > .nav-item::after {
+        transform: rotate(180deg);
+      }
+
+      .dropdown-content {
+        display: none;
+        position: static;
+        width: 100%;
+        box-shadow: none;
+        background: #f8f8f8;
+        padding: 0;
+        border-top: none;
+      }
+
+      .dropdown.active .dropdown-content {
+        display: block;
+      }
+
+      .dropdown-item {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        color: var(--secondary-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
+
+    @media (min-width: 769px) {
+      .menu-toggle {
+        display: none;
+      }
+
+      .nav-container {
+        display: flex !important;
+      }
+
+      .dropdown:hover .dropdown-content {
+        display: block;
       }
     }
 
@@ -265,6 +418,20 @@
       font-size: 0.9rem;
     }
   </style>
+  <script>
+    function toggleMenu() {
+      const navContainer = document.getElementById('navContainer');
+      navContainer.classList.toggle('active');
+      
+      const dropdowns = document.querySelectorAll('.dropdown');
+      dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', function(e) {
+          e.stopPropagation();
+          this.classList.toggle('active');
+        });
+      });
+    }
+  </script>
 </head>
 <body>
   <header>
@@ -275,7 +442,10 @@
           <div class="attorney-title">Abogado Especialista</div>
         </div>
         <nav>
-          <div class="nav-container">
+          <button class="menu-toggle" onclick="toggleMenu()">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <div class="nav-container" id="navContainer">
             <a href="index.html" class="nav-item">Inicio</a>
             <div class="dropdown">
               <a href="accidentes-laborales.html" class="nav-item">Accidentes</a>
@@ -359,7 +529,58 @@
   </section>
 
   <footer>
-    <p>&copy; 2024 Santiago Castelli Abogado - Todos los Derechos Reservados</p>
+    <p>
+      <span>&copy; 2024 Santiago Castelli - Todos los Derechos Reservados |</span>
+      <span>Web Design by TwentyTwo ®</span>
+    </p>
   </footer>
+
+  <script>
+    function toggleMenu() {
+      const navContainer = document.getElementById('navContainer');
+      navContainer.classList.toggle('active');
+      
+      const dropdowns = document.querySelectorAll('.dropdown');
+      dropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', function(e) {
+          e.stopPropagation();
+          this.classList.toggle('active');
+        });
+      });
+    }
+
+    // Mejorar el manejo de dropdowns en móvil
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+      const dropdownLink = dropdown.querySelector('.nav-item');
+      
+      dropdownLink.addEventListener('click', function(e) {
+        if (window.innerWidth <= 768) {
+          e.preventDefault();
+          const wasActive = dropdown.classList.contains('active');
+          
+          // Cerrar todos los dropdowns
+          document.querySelectorAll('.dropdown').forEach(d => {
+            d.classList.remove('active');
+          });
+          
+          // Abrir el actual si no estaba activo
+          if (!wasActive) {
+            dropdown.classList.add('active');
+          }
+        }
+      });
+    });
+
+    // Cerrar menú al hacer click fuera
+    document.addEventListener('click', function(e) {
+      const navContainer = document.getElementById('navContainer');
+      const menuToggle = document.querySelector('.menu-toggle');
+      
+      if (!navContainer.contains(e.target) && !menuToggle.contains(e.target)) {
+        navContainer.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+    });
+  </script>
 </body>
 </html> 

@@ -46,7 +46,7 @@
       align-items: center;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 0.5rem 0 0.5rem;
+      padding: 0 1rem;
       height: 80px;
     }
 
@@ -54,13 +54,19 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      margin: 0;
+      padding: 0;
+    }
+
+    .attorney-text {
+      display: flex;
+      flex-direction: column;
       gap: 0.3rem;
-      margin-left: 2rem;
     }
 
     .attorney-name {
       font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
+      font-size: 2rem;
       font-weight: 700;
       color: var(--primary-color);
       letter-spacing: 0.7px;
@@ -68,7 +74,7 @@
     }
 
     .attorney-title {
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: var(--secondary-color);
       font-family: 'Montserrat', sans-serif;
       font-weight: 500;
@@ -241,6 +247,19 @@
 
       .attorney-title {
         font-size: 0.9rem;
+      }
+
+      .logo-container {
+        width: 80px;
+        height: 80px;
+      }
+
+      .attorney-name {
+        font-size: 1.4rem;
+      }
+
+      .attorney-title {
+        font-size: 0.8rem;
       }
     }
 
@@ -602,7 +621,8 @@
       }
 
       .attorney-info {
-        margin-left: 1rem;
+        margin-left: 0;
+        gap: 1rem;
       }
 
       .attorney-name {
@@ -1001,6 +1021,10 @@
         padding: 0 1rem;
         position: relative;
       }
+      
+      .attorney-info {
+        padding-left: 0.5rem;
+      }
 
       .nav-container {
         display: none;
@@ -1170,8 +1194,10 @@
     <div class="header-container">
       <div class="header-top">
         <div class="attorney-info">
-          <div class="attorney-name">Santiago Castelli</div>
-          <div class="attorney-title">Abogado Especialista</div>
+          <div class="attorney-text">
+            <div class="attorney-name">Santiago Castelli</div>
+            <div class="attorney-title">Abogado Especialista</div>
+          </div>
         </div>
         <button class="menu-toggle" onclick="toggleMenu()">
           <i class="fas fa-bars"></i>
@@ -1377,7 +1403,7 @@
 
   <footer>
     <p>
-      <span>&copy; 2024 Santiago Castelli - Todos los Derechos Reservados</span>
+      <span>&copy; 2024 Santiago Castelli - Todos los Derechos Reservados |</span>
       <span>Web Design by TwentyTwo ®</span>
     </p>
   </footer>
